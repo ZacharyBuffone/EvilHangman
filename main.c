@@ -8,7 +8,7 @@
 #include "binary_search_tree.h"
 #include "node.h"
 
-//#define DEBUG
+#define DEBUG
 
 int get_word_len();
 int get_num_of_guesses();
@@ -94,19 +94,20 @@ void play_hangman(int word_len, int num_of_guesses)
 		string_insertion(largest_node->key, stdout);
 		printf("\n");
 		#endif
-		string_destroy(&new_key);
 		string_destroy(&current_word_family);
 		current_word_family = string_copy(largest_node->key);
 		vector_string_shallow_destroy(&word_vec);
 		word_vec = vector_string_shallow_copy(largest_node->value);
 
 		///win condition
-		if(vector_string_get_size(largest_node->value) == 1)
+		if(((Node*)tree)->right == NULL && ((Node*)tree)->left == NULL
+			&& vector_string_get_size(((Node*)tree)->value) == 1) //bad
 		{
 			user_win(largest_node->key);
 			bst_destroy(&tree);
 			break;
 		}
+
 		bst_destroy(&tree);
 		num_of_guesses--;
 	}
@@ -159,6 +160,9 @@ void insert_word_into_tree(BST tree, STRING key, STRING word)
 		#endif
 		node = bst_insert_key(tree, key);
 	}
+	else
+		string_destroy(&key);
+
 	vector_string_push_back(node->value, word);
 	return;
 }
