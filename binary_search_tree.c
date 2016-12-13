@@ -106,6 +106,11 @@ Node* bst_at_key(BST hRoot, STRING key)
 	return curr;
 }
 
+Node* bst_at_root(BST hRoot)
+{
+	return (Node*)hRoot;
+}
+
 Node* bst_at_largest_key(BST hRoot)
 {
 	Node* root = (Node*)hRoot;

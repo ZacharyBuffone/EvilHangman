@@ -16,6 +16,8 @@ void bst_destroy(BST*);
 Node* bst_insert_key(BST, STRING);
 Node* bst_at_key(BST, STRING);
 
+Node* bst_at_root(BST);
+
 Node* bst_at_largest_key(BST);
 void bst_traverse(BST);
 
